@@ -2,7 +2,7 @@
   "name": "react-todos",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://mihirhebalkar.github.io/{React-To-Do}/",
+  "homepage": "https://mihirhebalkar.github.io/React-To-Do",
   "type": "module",
   "scripts": {
     "predeploy" : "npm run build",
