@@ -5,15 +5,24 @@ import TodoItem from './TodoItem';
 
 const initialTodos = [
     {id :1, text:"Learn Nextjs", completed:false},
-    {id :1, text:"Java Assignment", completed:false}
+    {id :2, text:"Java Assignment", completed:false},
+    {id :3, text:"Learn React", completed:false},
+    {id :4, text:"Enjoy", completed:true}
 ]
 
 export default function TodoList(){
-    const [todos, SetTodos] = useState(initialTodos)
+    const [todos, setTodos] = useState(initialTodos)
+
+    const removeTodo = (id) => {
+        setTodos(prevTodos => {
+            return prevTodos.filter((t) => t.id!==id);
+        });
+    }
+
     return (
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             {todos.map(todo => (
-               <TodoItem todo={todo} key={todo.id}/>
+               <TodoItem todo={todo} key={todo.id} remove = {removeTodo}/>
             ))}
         </List>
     );
