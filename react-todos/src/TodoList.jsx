@@ -1,18 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import TodoItem from './TodoItem';
 import TodoForm from './TodoForm';
 
-
-const initialTodos = [
-    {id :1, text:"Learn Nextjs", completed:false},
-    {id :2, text:"Java Assignment", completed:false},
-    {id :3, text:"Learn React", completed:false},
-    {id :4, text:"Enjoy", completed:true}
-]
+const getInitialData = () => {
+    const data = JSON.parse(localStorage.getItem("todos"));
+    if(!data) return [];
+    return data;
+};
 
 export default function TodoList(){
-    const [todos, setTodos] = useState(initialTodos)
+    const [todos, setTodos] = useState(getInitialData)
 
     const removeTodo = (id) => {
         setTodos(prevTodos => {
@@ -32,11 +30,18 @@ export default function TodoList(){
         });
     }
 
+    useEffect(() => {
+        localStorage.setItem(
+            'todos',
+            JSON.stringify(todos)
+        )
+    },[todos]);
+
     const addTodo = (text) => {
         setTodos(prevTodos => {
-           return [...prevTodos, {text: text, id: 8, completed: false}]
-        })
-    }
+           return [...prevTodos, {text: text, id: crypto.randomUUID(), completed: false}]
+        });
+    };
 
     return (
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
