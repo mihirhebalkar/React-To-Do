@@ -33,7 +33,9 @@ export default function TodoList(){
     }
 
     const addTodo = (text) => {
-
+        setTodos(prevTodos => {
+           return [...prevTodos, {text: text, id: 8, completed: false}]
+        })
     }
 
     return (
@@ -44,7 +46,7 @@ export default function TodoList(){
                remove = {removeTodo} 
                toggle={() => toggleTodo(todo.id)}/>
             ))}
-            <TodoForm />
+            <TodoForm addTodo={addTodo}/>
         </List>
     );
 }
